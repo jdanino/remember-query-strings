@@ -31,7 +31,7 @@ class RememberQueryStrings
     {
         $remembered = array_filter($request->session()->get('remember_query_strings.'.$request->route()->getName()) ?? []);
 
-        if ($remembered) {
+        if ($remembered && ! $request->session()->has('errors')) {
             $request->session()->reflash();
 
             return redirect(url($request->path()).'?'.http_build_query($remembered));
