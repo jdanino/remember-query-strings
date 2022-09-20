@@ -51,6 +51,8 @@ class RememberQueryStrings
     {
         $request->session()->remove('remember_query_strings.'.$request->route()->getName());
 
+        $request->session()->reflash();
+
         return redirect(url($request->path()));
     }
 }
