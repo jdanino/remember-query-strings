@@ -11,6 +11,10 @@ class RememberQueryStrings
         if ($request->wantsJson()) {
             return $next($request);
         }
+        
+        if(parse_url(url()->previous())['path'] === parse_url(url()->current())['path']) {
+            return $next($request);
+        }
 
         if (empty($request->all())) {
             return $this->remembered($next, $request);
